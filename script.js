@@ -20,54 +20,45 @@ function writePassword() {
 function generatePassword(){
     // Selecting length and criterias for the password
     var lengthValue = prompt("What is the length of your password? Choose a number between 8 and 128.");
-    var lowerCaseLetters = confirm("Do you want to include Lower Case character in your password?");
-    if(lowerCaseLetters == true){
-        alert("You chose to include Lower Case!");
+    if(lengthValue < 8 || lengthValue>128){
+        alert("Invalid length");
     }
-    var upperCaseLetters = confirm("Do you want to include Upper Case character in your password?");
-    if(upperCaseLetters == true){
-      alert("You chose to include Upper Case!");
-    }
-    var numericValues = confirm("Do you want to include Numeric Values in your password?");
-    if(numericValues == true){
-      alert("You chose to include Numbers!");
-    }
-    var specialCharacters = confirm("Do you want to include Special Character in your password?");
-    if(specialCharacters == true){
-      alert("You chose to include Special Characters!");
-    }
-    // Create an array for the results
-    var resultNew = [lowerCaseLetters, upperCaseLetters, numericValues, specialCharacters];
-    // Remove the unwanted criterias from array, calling function checking
-    var resultone = resultNew.filter(checking);
-    // If nothing is selcted for the password, alert the user
-    if(resultone.length == 0){
-        alert("Invalid entry!");
-    }
-    //otherwise generate the password using the selected criterias
     else{
-       for(var i=0; i< lengthValue; i+=(resultone.length)){
-           // if user wants to include lower case letters, calling a function to randomly select one lower case letter
-              if(lowerCaseLetters === true){
-                  randomLower();
-              }
-              // if user wants to include upper case letters, calling a function to randomly select one upper case letter
-              if(upperCaseLetters === true){
-                  randomUpper();
-              }
-              // if user wants to include numbers, calling a function to randomly select one number
-              if(numericValues === true){
-                  randomNumeric();
-              }
-              // if user wants to include special character, calling a function to randomly select one special character
-              if(specialCharacters === true){
-                  randomSpecial();
-              }
-              console.log(passwordValue);
-          }
-      // reducing password length to given value
-        passwordResult = passwordValue.slice(0,lengthValue);
-        return passwordResult;
+        var lowerCaseLetters = confirm("Do you want to include Lower Case character in your password?");
+        var upperCaseLetters = confirm("Do you want to include Upper Case character in your password?");
+        var numericValues = confirm("Do you want to include Numeric Values in your password?");
+        var specialCharacters = confirm("Do you want to include Special Character in your password?");
+        if(lowerCaseLetters == false && upperCaseLetters == false && numericValues == false && specialCharacters == false){
+            alert("You gotta chose at least one character set")
+        }
+        else{
+            // Create an array for the results
+            var resultNew = [lowerCaseLetters, upperCaseLetters, numericValues, specialCharacters];
+            // Remove the unwanted criterias from array, calling function checking
+            var resultone = resultNew.filter(checking);
+            for(var i=0; i< lengthValue; i+=(resultone.length)){
+                // if user wants to include lower case letters, calling a function to randomly select one lower case letter
+                    if(lowerCaseLetters === true){
+                        randomLower();
+                    }
+                    // if user wants to include upper case letters, calling a function to randomly select one upper case letter
+                    if(upperCaseLetters === true){
+                        randomUpper();
+                    }
+                    // if user wants to include numbers, calling a function to randomly select one number
+                    if(numericValues === true){
+                        randomNumeric();
+                    }
+                    // if user wants to include special character, calling a function to randomly select one special character
+                    if(specialCharacters === true){
+                        randomSpecial();
+                    }
+                }
+            // reducing password length to given value
+                passwordResult = passwordValue.slice(0,lengthValue);
+                return passwordResult;
+            // }
+        }
     }
 }
   
